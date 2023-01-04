@@ -13,30 +13,30 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class InputDataViewModel extends AndroidViewModel {
+//public class InputDataViewModel extends AndroidViewModel {
 
-    LaporanDao laporanDao;
+   // LaporanDao laporanDao;
 
-    public InputDataViewModel(@NonNull Application application) {
-        super(application);
+   // public InputDataViewModel(@NonNull Application application) {
+   //     super(application);
 
-        laporanDao = DatabaseClient.getInstance(application).getAppDatabase().laporanDao();
-    }
+     //   laporanDao = DatabaseClient.getInstance(application).getAppDatabase().laporanDao();
+   // }
 
-    public void addLaporan(final String nama, final String kerusakan, final String lokasi, final String catatan) {
-        Completable.fromAction(() -> {
+   // public void addLaporan(final String nama, final String kerusakan, final String lokasi, final String catatan) {
+   //     Completable.fromAction(() -> {
 
-                    ModelDatabase modelDatabase = new ModelDatabase();
-                    modelDatabase.nama = nama;
-                    modelDatabase.kerusakan = kerusakan;
-                    modelDatabase.lokasi = lokasi;
-                    modelDatabase.catatan = catatan;
-                    laporanDao.insertData(modelDatabase);
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
-    }
+     //               ModelDatabase modelDatabase = new ModelDatabase();
+       //             modelDatabase.nama = nama;
+         //           modelDatabase.kerusakan = kerusakan;
+           //         modelDatabase.lokasi = lokasi;
+             //       modelDatabase.catatan = catatan;
+               //     laporanDao.insertData(modelDatabase);
+               // })
+           //     .subscribeOn(Schedulers.io())
+             //   .observeOn(AndroidSchedulers.mainThread())
+             //   .subscribe();
+ //   }
 
-    }
+  //  }
 

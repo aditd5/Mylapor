@@ -20,26 +20,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     Context mContext;
     HistoryAdapterCallback mAdapterCallback;
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNama, tvKerusakan, tvLokasi, tvCatatan;
-        public CardView cvHistory;
-
-        public ViewHolder(View view) {
-            super(itemView);
-            tvNama = itemView.findViewById(R.id.tvNama);
-            tvKerusakan = itemView.findViewById(R.id.tvKerusakan);
-            tvLokasi = itemView.findViewById(R.id.tvLokasi);
-            tvCatatan = itemView.findViewById(R.id.tvCatatan);
-            cvHistory = itemView.findViewById(R.id.cvHistory);
-
-            cvHistory.setOnClickListener(view -> {
-                ModelDatabase modelLaundry = modelDatabase.get(getAdapterPosition());
-                mAdapterCallback.onDelete(modelLaundry);
-            });
-        }
-    }
-
     public HistoryAdapter(Context context, List<ModelDatabase> modelDatabaseList,
                           HistoryAdapterCallback adapterCallback) {
         this.mContext = context;
@@ -77,6 +57,26 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public interface HistoryAdapterCallback {
         void onDelete(ModelDatabase modelLaundry);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView tvNama, tvKerusakan, tvLokasi, tvCatatan;
+        public CardView cvHistory;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            tvNama = itemView.findViewById(R.id.tvNama);
+            tvKerusakan = itemView.findViewById(R.id.tvKerusakan);
+            tvLokasi = itemView.findViewById(R.id.tvLokasi);
+            tvCatatan = itemView.findViewById(R.id.tvCatatan);
+            cvHistory = itemView.findViewById(R.id.cvHistory);
+
+            cvHistory.setOnClickListener(view -> {
+                ModelDatabase modelLaundry = modelDatabase.get(getAdapterPosition());
+                mAdapterCallback.onDelete(modelLaundry);
+            });
+        }
     }
 
 }

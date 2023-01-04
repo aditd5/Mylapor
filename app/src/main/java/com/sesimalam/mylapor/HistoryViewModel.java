@@ -42,4 +42,3 @@ public class HistoryViewModel extends AndroidViewModel {
     }
 }
 
-}

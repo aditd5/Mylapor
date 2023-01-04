@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sesimalam.mylapor.room.ModelDatabase;
@@ -45,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
     private void setViewModel() {
         historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
-        historyViewModel.getDataLaporan.observe(this, modelDatabases -> {
+        historyViewModel.getDataLaporan().observe(this, modelDatabases -> {
             historyAdapter.setDataAdapter(modelDatabases);
                 }
         );
@@ -63,6 +66,23 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
     }
 
     @Override
+    public void onDelete(ModelDatabase modelDatabase) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Hapus riwayat ini?");
+        alertDialogBuilder.setPositiveButton("Ya, hapus" , ((dialogInterface, i) -> {
+            int uid = modelDatabase.uid;
+            historyViewModel.deleteDataById(uid);
+            Toast.makeText(HistoryActivity.this,
+                    "Data yang dipilih sudah dihapus", Toast.LENGTH_SHORT).show();
+        }));
+
+        alertDialogBuilder.setNegativeButton("Batal", ((dialogInterface, i) -> dialogInterface.cancel()));
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
@@ -70,5 +90,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
